@@ -12,6 +12,7 @@ fun main(){
         when(n){
             1 -> task_1()
             2 -> task_2()
+            3 -> task_3()
             0 -> break
         }
     }
@@ -82,3 +83,29 @@ fun task_2() {
     }
 }
 
+// Задание 3
+fun task_3(){
+    println("===============Задание 3===============")
+    val a = (0..10).random()
+    while(true) {
+        println("Введите число: ")
+        val b = readln().toIntOrNull()
+
+        if (b == null || b !in 0..10) {
+            println("Ошибка ввода: введено не целое положительное число.")
+            continue
+        }
+        else if( b>a){
+            println("Много")
+            continue
+        }
+        else if(b<a){
+            println("Мало")
+            continue
+        }
+        else{
+            println("Угадал")
+            break
+        }
+    }
+}
