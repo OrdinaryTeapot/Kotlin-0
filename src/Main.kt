@@ -1,14 +1,30 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// Задание 1
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+    println("Введите число: ")
+    val n = readln()
+    val checkInput = n.toIntOrNull()
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+    if(checkInput == null) {
+        println("Ошибка ввода: введено не целое положительное число.")
+        return
     }
+    // Способ 1
+    val method_1 = n.toInt()
+    val lastDigit = method_1%10
+    var firstDigit = method_1
+    while(firstDigit >= 10) {
+        firstDigit/=10
+    }
+    val sum_1 = firstDigit + lastDigit
+
+    println("Способ 1.\nСумма первой ($firstDigit) и последней ($lastDigit) цифр: $sum_1")
+
+    // Способ 2
+    val method_2 = n
+    val firstSymbol = method_2.first().digitToInt()
+    val lastSymbol = method_2.last().digitToInt()
+
+    val sum_2 = firstSymbol + lastSymbol
+
+    println("Способ 2.\nСумма первой ($firstSymbol) и последней ($lastSymbol) цифр: $sum_2")
 }
