@@ -1,3 +1,5 @@
+import kotlin.math.sqrt
+
 // Запуск функций
 fun main(){
     while(true){
@@ -13,6 +15,7 @@ fun main(){
             1 -> task_1()
             2 -> task_2()
             3 -> task_3()
+            4 -> task_4()
             0 -> break
         }
     }
@@ -108,4 +111,39 @@ fun task_3(){
             break
         }
     }
+}
+
+fun task_4(){
+    println("===============Задание 4===============")
+    println("Введите количество простых чисел (n >= 1): ")
+
+    val n = readln().toIntOrNull()
+    if (n == null || n < 1) {
+        println("Ошибка: введите целое число больше или равное 1.")
+        return
+    }
+
+    var count = 0
+    var candidate = 2
+
+    while (count < n) {
+        if (isPrime(candidate)) {
+            count++
+            println("$count-е число: $candidate")
+        }
+        candidate++
+    }
+}
+
+// Функция для проверки, является ли число простым
+fun isPrime(number: Int): Boolean {
+    if (number < 2) return false
+    // Проверяем делители только до квадратного корня из числа
+    val limit = sqrt(number.toDouble()).toInt()
+    for (i in 2..limit) {
+        if (number % i == 0) {
+            return false // Нашелся делитель — число составное
+        }
+    }
+    return true
 }
