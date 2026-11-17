@@ -3,6 +3,7 @@ import kotlin.math.sqrt
 // Запуск функций
 fun main(){
     while(true){
+        println("=======================================\n")
         println("Выберите номер задания (1-10), введите 0 для выхода:")
         val choice = readln()
         val checkInput = choice.toIntOrNull()
@@ -16,6 +17,7 @@ fun main(){
             2 -> task_2()
             3 -> task_3()
             4 -> task_4()
+            5 -> task_5()
             0 -> break
         }
     }
@@ -146,4 +148,49 @@ fun isPrime(number: Int): Boolean {
         }
     }
     return true
+}
+
+fun task_5(){
+    println("===============Задание 5===============")
+    val numbers = arrayOf(3, 5, 6, 1, 7, 10, 9, 4, 12, 18)
+    println("Результат цикла for:")
+    useFor(numbers)
+    println("Результат цикла while:")
+    useWhile(numbers)
+    println("Результат оператора forEach:")
+    useForEach(numbers)
+}
+
+// Функция цикла for
+fun useFor (array : Array<Int>) {
+    for (i in 1 until array.size - 1){
+        if(array[i] > array[i-1] && array[i] > array[i+1]){
+            println("${array[i]}")
+        }
+    }
+    println()
+}
+
+// Функция цикла while
+fun useWhile(array : Array<Int>) {
+    var i = 1
+    while (i < array.size - 1) {
+        if(array[i] > array[i-1] && array[i] > array[i+1]){
+            println("${array[i]}")
+        }
+        i++
+    }
+    println()
+}
+
+// Функция оператора forEach
+fun useForEach(array : Array<Int>) {
+    array.forEachIndexed { index, element ->
+        if(index > 0 && index<array.size - 1){
+            if(element > array[index-1] && element > array[index+1]){
+                println("${element}")
+            }
+        }
+    }
+    println()
 }
