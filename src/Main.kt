@@ -1,27 +1,29 @@
 import kotlin.math.sqrt
 
 // Запуск функций
-fun main(){
-    while(true){
+fun main() {
+    while (true) {
         println("=======================================\n")
         println("Выберите номер задания (1-10), введите 0 для выхода:")
         val choice = readln()
         val checkInput = choice.toIntOrNull()
-        if(checkInput == null) {
+        if (checkInput == null) {
             println("Ошибка ввода: введено не целое положительное число.")
             break
         }
         val n = choice.toInt()
-        when(n){
+        when (n) {
             1 -> task_1()
             2 -> task_2()
             3 -> task_3()
             4 -> task_4()
             5 -> task_5()
+            6 -> task_6()
             0 -> break
         }
     }
 }
+
 // Задание 1
 fun task_1() {
     println("===============Задание 1===============")
@@ -29,16 +31,16 @@ fun task_1() {
     val n = readln()
     val checkInput = n.toIntOrNull()
 
-    if(checkInput == null) {
+    if (checkInput == null) {
         println("Ошибка ввода: введено не целое положительное число.")
         return
     }
     // Способ 1
     val method_1 = n.toInt()
-    val lastDigit = method_1%10
+    val lastDigit = method_1 % 10
     var firstDigit = method_1
-    while(firstDigit >= 10) {
-        firstDigit/=10
+    while (firstDigit >= 10) {
+        firstDigit /= 10
     }
     val sum_1 = firstDigit + lastDigit
 
@@ -89,33 +91,31 @@ fun task_2() {
 }
 
 // Задание 3
-fun task_3(){
+fun task_3() {
     println("===============Задание 3===============")
     val a = (0..10).random()
-    while(true) {
+    while (true) {
         println("Введите число: ")
         val b = readln().toIntOrNull()
 
         if (b == null || b !in 0..10) {
             println("Ошибка ввода: введено не целое положительное число.")
             continue
-        }
-        else if( b>a){
+        } else if (b > a) {
             println("Много")
             continue
-        }
-        else if(b<a){
+        } else if (b < a) {
             println("Мало")
             continue
-        }
-        else{
+        } else {
             println("Угадал")
             break
         }
     }
 }
 
-fun task_4(){
+// Задание 4
+fun task_4() {
     println("===============Задание 4===============")
     println("Введите количество простых чисел (n >= 1): ")
 
@@ -150,21 +150,22 @@ fun isPrime(number: Int): Boolean {
     return true
 }
 
-fun task_5(){
+// Задание 5
+fun task_5() {
     println("===============Задание 5===============")
     val numbers = arrayOf(3, 5, 6, 1, 7, 10, 9, 4, 12, 18)
     println("Результат цикла for:")
-    useFor(numbers)
+    useForTask5(numbers)
     println("Результат цикла while:")
-    useWhile(numbers)
+    useWhileTask5(numbers)
     println("Результат оператора forEach:")
-    useForEach(numbers)
+    useForEachTask5(numbers)
 }
 
 // Функция цикла for
-fun useFor (array : Array<Int>) {
-    for (i in 1 until array.size - 1){
-        if(array[i] > array[i-1] && array[i] > array[i+1]){
+fun useForTask5(array: Array<Int>) {
+    for (i in 1 until array.size - 1) {
+        if (array[i] > array[i - 1] && array[i] > array[i + 1]) {
             println("${array[i]}")
         }
     }
@@ -172,10 +173,10 @@ fun useFor (array : Array<Int>) {
 }
 
 // Функция цикла while
-fun useWhile(array : Array<Int>) {
+fun useWhileTask5(array: Array<Int>) {
     var i = 1
     while (i < array.size - 1) {
-        if(array[i] > array[i-1] && array[i] > array[i+1]){
+        if (array[i] > array[i - 1] && array[i] > array[i + 1]) {
             println("${array[i]}")
         }
         i++
@@ -184,13 +185,114 @@ fun useWhile(array : Array<Int>) {
 }
 
 // Функция оператора forEach
-fun useForEach(array : Array<Int>) {
+fun useForEachTask5(array: Array<Int>) {
     array.forEachIndexed { index, element ->
-        if(index > 0 && index<array.size - 1){
-            if(element > array[index-1] && element > array[index+1]){
+        if (index > 0 && index < array.size - 1) {
+            if (element > array[index - 1] && element > array[index + 1]) {
                 println("${element}")
             }
         }
     }
     println()
+}
+
+// Задание 6
+fun task_6() {
+    println("===============Задание 6===============")
+    val numbers = arrayOf(3, 5, 6, 1, 7, 10, 9, 4, 12, -18)
+    println("\nРезультат цикла for:")
+    useForTask6(numbers)
+    println("\nРезультат цикла while:")
+    useWhileTask6(numbers)
+    println("\nРезультат оператора forEach:")
+    useForEachTask6(numbers)
+    println("\nРезультат функции reduce():")
+    useReduceTask6(numbers)
+    println("\nРезультат функций min(), max():")
+    useMinMaxTask6(numbers)
+
+}
+
+// Функция цикла for
+fun useForTask6(array: Array<Int>) {
+    var product = 1
+    var min = array[0]
+    var max = array[0]
+
+    for (element in array) {
+        product *= element
+        if (element < min) {
+            min = element
+        }
+        if (element > max) {
+            max = element
+        }
+    }
+    println("Произведение элементов: $product")
+    println("Минимальный элемент: $min")
+    println("Максимальный элемент: $max")
+}
+
+// Функция цикла while
+fun useWhileTask6(array: Array<Int>) {
+    var product = 1
+    var min = array[0]
+    var max = array[0]
+
+    var i = 0
+    while (i < array.size) {
+        val element = array[i]
+        product *= element
+
+        if (element < min) {
+            min = element
+        }
+        if (element > max) {
+            max = element
+        }
+        i++
+    }
+    println("Произведение элементов: $product")
+    println("Минимальный элемент: $min")
+    println("Максимальный элемент: $max")
+}
+
+// Функция оператора forEach
+fun useForEachTask6(array: Array<Int>) {
+    var product = 1
+    var min = array[0]
+    var max = array[0]
+
+    array.forEach { element ->
+        product *= element
+        if (element < min) {
+            min = element
+        }
+        if (element > max) {
+            max = element
+        }
+    }
+    println("Произведение элементов: $product")
+    println("Минимальный элемент: $min")
+    println("Максимальный элемент: $max")
+}
+
+// Функция reduce()
+fun useReduceTask6(array: Array<Int>) {
+    val product = array.reduce { acc, element -> acc * element }
+    val min = array.reduce { acc, element -> if (element < acc) element else acc }
+    val max = array.reduce { acc, element -> if (element > acc) element else acc }
+    println("Произведение элементов: $product")
+    println("Минимальный элемент: $min")
+    println("Максимальный элемент: $max")
+}
+
+// Функции min(), max()
+fun useMinMaxTask6(array: Array<Int>) {
+    val product = array.reduce { acc, element -> acc * element }
+    val min = array.min()
+    val max = array.max()
+    println("Произведение элементов: $product")
+    println("Минимальный элемент: $min")
+    println("Максимальный элемент: $max")
 }
