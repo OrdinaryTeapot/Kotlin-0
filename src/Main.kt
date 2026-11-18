@@ -19,6 +19,7 @@ fun main() {
             4 -> task_4()
             5 -> task_5()
             6 -> task_6()
+            7 -> task_7()
             0 -> break
         }
     }
@@ -295,4 +296,59 @@ fun useMinMaxTask6(array: Array<Int>) {
     println("Произведение элементов: $product")
     println("Минимальный элемент: $min")
     println("Максимальный элемент: $max")
+}
+
+// Задание 7
+fun task_7() {
+    println("===============Задание 7===============")
+    println("Введите коэффициент a:")
+    val a = readln().toDoubleOrNull()
+    if (a == null) {
+        println("Ошибка ввода: введено не число.")
+        return
+    }
+    println("Введите коэффициент b:")
+    val b = readln().toDoubleOrNull()
+    if (b == null) {
+        println("Ошибка ввода: введено не число.")
+        return
+    }
+    println("Введите коэффициент c:")
+    val c = readln().toDoubleOrNull()
+    if (c == null) {
+        println("Ошибка ввода: введено не число.")
+        return
+    }
+    println("Результат расчётов:")
+    quadraticRoot(a, b, c)
+}
+
+fun sqr(n: Double): Double = n * n
+
+fun discriminant(a: Double, b: Double, c: Double): Double = sqr(b) - 4 * a * c
+
+fun rootsNumber(a: Double, b: Double, c: Double): Int {
+    val d = discriminant(a, b, c)
+    return when {
+        d > 0 -> 2
+        d == 0.0 -> 1
+        else -> 0
+    }
+}
+
+fun quadraticRoot(a: Double, b: Double, c: Double) {
+    when (rootsNumber(a, b, c)) {
+        0 -> println("Корней нет (дискриминант меньше нуля).")
+        1 -> {
+            val x = -b / (2 * a)
+            println("Уравнение имеет один корень: x = $x")
+        }
+
+        2 -> {
+            val d = discriminant(a, b, c)
+            val x1 = (-b + sqrt(d)) / (2 * a)
+            val x2 = (-b - sqrt(d)) / (2 * a)
+            println("Уравнение имеет два корня: x1 = $x1, x2 = $x2")
+        }
+    }
 }
