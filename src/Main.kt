@@ -22,6 +22,7 @@ fun main() {
             7 -> task_7()
             8 -> task_8()
             9 -> task_9()
+            10 -> task_10()
             0 -> break
         }
     }
@@ -429,3 +430,69 @@ class Vector(val x: Double, val y: Double, val z: Double) {
 }
 
 fun scalarProduct(v1: Vector, v2: Vector): Double = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+
+// Задание 10
+fun task_10() {
+    println("===============Задание 10===============")
+    val vehicles: List<Vehicle> = listOf(Vehicle(), Boat(), Airplane(), Tank())
+
+    for (vehicle in vehicles) {
+        vehicle.start()
+        vehicle.stop()
+        println()
+    }
+}
+
+open class Vehicle {
+
+    open val name: String = "Транспортное средство"
+    open val speed: Int = 0
+
+    open fun start() {
+        println("$name начало движение со скоростью $speed км/ч.")
+    }
+
+    open fun stop() {
+        println("$name остановилось.")
+    }
+}
+
+class Boat : Vehicle() {
+
+    override val name: String = "Лодка"
+    override val speed: Int = 50
+
+    override fun start() {
+        println("$name отчалила и поплыла со скоростью $speed км/ч.")
+    }
+
+    override fun stop() {
+        println("$name причалила к берегу и остановилась.")
+    }
+}
+
+class Airplane : Vehicle() {
+    override val name: String = "Самолёт"
+    override val speed: Int = 900
+
+    override fun start() {
+        println("$name взлетел и набрал скорость $speed км/ч.")
+    }
+
+    override fun stop() {
+        println("$name совершил посадку и полностью остановился.")
+    }
+}
+
+class Tank : Vehicle() {
+    override val name: String = "Танк"
+    override val speed: Int = 60
+
+    override fun start() {
+        println("$name завел двигатель и двинулся со скоростью $speed км/ч.")
+    }
+
+    override fun stop() {
+        println("$name затормозил и заглушил двигатель.")
+    }
+}
