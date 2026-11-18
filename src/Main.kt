@@ -21,6 +21,7 @@ fun main() {
             6 -> task_6()
             7 -> task_7()
             8 -> task_8()
+            9 -> task_9()
             0 -> break
         }
     }
@@ -398,3 +399,33 @@ class NumberArrayProcessor(private val numbers: Array<Int>) {
         return sum / numbers.size
     }
 }
+
+// Задание 9
+fun task_9() {
+    println("===============Задание 9===============")
+    val v1 = Vector(1.0, 2.0, 3.0)
+    val v2 = Vector(3.0, 2.0, 1.0)
+
+    println("Длина вектора v1: ${v1.length()}")
+    println("Скалярное произведение (обычный метод): ${v1.dotProduct(v2)}")
+    println("Скалярное произведение (infix-запись): ${v1 dot v2}")
+    println("Скалярное произведение (оператор *): ${Vector(1.0, 2.0, 3.0) * Vector(3.0, 2.0, 1.0)}")
+    println("Скалярное произведение (внешняя функция): ${scalarProduct(v1, v2)}")
+}
+
+class Vector(val x: Double, val y: Double, val z: Double) {
+
+    // Метод вычисления длины вектора
+    fun length() = sqrt(x * x + y * y + z * z)
+
+    // Метод вычисления скалярного произведения
+    fun dotProduct(other: Vector) = x * other.x + y * other.y + z * other.z
+
+    // Метод для инфиксной записи для скалярного произведения
+    infix fun dot(other: Vector): Double = this.dotProduct(other)
+
+    // Метод для перегрузки оператора
+    operator fun times(other: Vector): Double = this.dotProduct(other)
+}
+
+fun scalarProduct(v1: Vector, v2: Vector): Double = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
