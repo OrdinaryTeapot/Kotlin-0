@@ -20,6 +20,7 @@ fun main() {
             5 -> task_5()
             6 -> task_6()
             7 -> task_7()
+            8 -> task_8()
             0 -> break
         }
     }
@@ -350,5 +351,50 @@ fun quadraticRoot(a: Double, b: Double, c: Double) {
             val x2 = (-b - sqrt(d)) / (2 * a)
             println("Уравнение имеет два корня: x1 = $x1, x2 = $x2")
         }
+    }
+}
+
+// Задание 8
+fun task_8() {
+    println("===============Задание 8===============")
+    val inputArray = arrayOf(3, -5, 4, 2, -1, 6)
+    val processor = NumberArrayProcessor(inputArray)
+    println("Исходный массив: ${inputArray.contentToString()}")
+    println("Сумма положительных элементов: ${processor.sumOfPositive()}")
+    println("Произведение всех элементов: ${processor.productOfElements()}")
+    println("Среднее арифметическое: ${processor.averageValue()}")
+}
+
+class NumberArrayProcessor(private val numbers: Array<Int>) {
+
+    // Метод для вычисления суммы положительных элементов
+    fun sumOfPositive(): Int {
+        var sum = 0
+        for (element in numbers) {
+            if (element > 0) {
+                sum += element
+            }
+        }
+        return sum
+    }
+
+    // Метод для вычисления произведения элементов массива
+    fun productOfElements(): Long {
+        if (numbers.isEmpty()) return 0L
+        var product = 1L
+        for (element in numbers) {
+            product *= element
+        }
+        return product
+    }
+
+    // Метод для вычисления среднего арифметического
+    fun averageValue(): Double {
+        if (numbers.isEmpty()) return 0.0
+        var sum = 0.0
+        for (element in numbers) {
+            sum += element
+        }
+        return sum / numbers.size
     }
 }
